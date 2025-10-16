@@ -1,0 +1,15 @@
+export interface Booking {
+    id: number,
+    scheduledPickUpDate: Date,
+    scheduledReturnDate: Date,
+    actualPickUpDate: Date | null,
+    actualReturnDate: Date | null,
+    vehicleId: number,
+    vehicleRegistrationNumber: string,
+    customerId: number,
+    customerName: string,
+    estimatedCost: number,
+    actualCost: number | null,
+    isPickedUp: boolean,
+    isReturned: boolean,
+}
