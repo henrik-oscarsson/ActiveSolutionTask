@@ -1,7 +1,6 @@
 # Active Solution Car Rental
 
 This task implements a frontend and backend to provide the business logic for car rental and return.
-Run it by starting the AspireAppHost or the ApiService.
 
 ## Prerequisites
 For this to work you need to run MS SQL Server in a Docker container.
