@@ -1,4 +1,4 @@
-# ActiveSolutionTask
+# Active Solution Car Rental
 
 This task implements a frontend and backend to provide the business logic for car rental and return.
 Run it by starting the AspireAppHost or the ApiService.
