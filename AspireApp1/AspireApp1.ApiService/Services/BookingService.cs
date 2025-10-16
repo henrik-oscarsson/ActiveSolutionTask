@@ -31,23 +31,24 @@ public class BookingService(
         });
         return bookings;
     }
-    
-    public Task<List<Vehicle>> GetAvailableVehiclesForDateRange(DateTime pickupDate, DateTime returnDate)
+
+    private void AssertDatesAreValid(DateTime pickupDate, DateTime returnDate)
     {
         if (returnDate <= pickupDate)
         {
             throw new ValidationException("ReturnDate must be after pickup date");
         }
+    }
+    
+    public Task<List<Vehicle>> GetAvailableVehiclesForDateRange(DateTime pickupDate, DateTime returnDate)
+    {
+        AssertDatesAreValid(pickupDate, returnDate);
         return bookingDbContext.GetAvailableVehiclesForDateRange(pickupDate, returnDate);
     }
     
     public async Task AddBooking(int vehicleId, int customerId, DateTime pickupDate, DateTime returnDate)
     {
-        if (returnDate <= pickupDate)
-        {
-            throw new ValidationException("ReturnDate must be after pickup date");
-        }
-
+        AssertDatesAreValid(pickupDate, returnDate);
         if (await bookingDbContext.VehicleCanBeBooked(vehicleId, pickupDate, returnDate))
         {
             await bookingDbContext.AddBooking(new Booking { CustomerId = customerId, VehicleId = vehicleId, ScheduledPickUpDate = pickupDate, ScheduledReturnDate = returnDate });

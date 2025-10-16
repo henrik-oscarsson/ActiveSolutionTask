@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import {Container, MenuItem} from "@mui/material";
+import {Container, MenuItem, Typography} from "@mui/material";
 import Bookings from "./components/Bookings/Bookings";
 import Vehicles from "./components/Vehicles/Vehicles";
 import Customers from "./components/Customers/Customers";
@@ -25,15 +25,15 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <AppBar position="sticky">
-          <Toolbar>
+          <Toolbar>          
             <MenuItem key='bookings'>
-              <Link to="/">Bookings</Link>
+              <Link to="/" className='Menu-link'><Typography sx={{ textAlign: 'center' }}>Bookings</Typography></Link>
             </MenuItem>
             <MenuItem key='customers'>
-              <Link to="/customers">Customers</Link>
+              <Link to="/customers" className='Menu-link'><Typography sx={{ textAlign: 'center' }}>Customers</Typography></Link>
             </MenuItem>
             <MenuItem key='vehicles'>
-              <Link to="/vehicles">Vehicles</Link>
+              <Link to="/vehicles" className='Menu-link'><Typography sx={{ textAlign: 'center' }}>Vehicles</Typography></Link>
             </MenuItem>
           </Toolbar>
         </AppBar>

@@ -160,6 +160,20 @@ public class BookingServiceTests
     }
     
     [Fact]
+    public void Pickup_DoesNothing_IfBookingIsNotFound()
+    {
+        // Arrange
+        var bookingService = CreateService();
+        _mockBookingDbContext.Setup(x => x.GetBooking(It.IsAny<int>())).ReturnsAsync((Booking?)null);
+        // Act
+        var cost = bookingService.Pickup(42);
+        // Assert
+        _mockBookingDbContext.Verify(x => x.GetBooking(It.IsAny<int>()), Times.Once);
+        _mockVehicleDbContext.Verify(x => x.GetVehicle(It.IsAny<int>()), Times.Never);
+        _mockBookingDbContext.Verify(x => x.Pickup(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
+    }
+
+    [Fact]
     public void Return_UpdatesBooking_And_Vehicle()
     {
         // Arrange
@@ -174,5 +188,19 @@ public class BookingServiceTests
         _mockBookingDbContext.Verify(x => x.GetBooking(It.IsAny<int>()), Times.Once);
         _mockBookingDbContext.Verify(x => x.Return(It.IsAny<int>(), meterSetting), Times.Once);
         _mockVehicleDbContext.Verify(x => x.Return(It.IsAny<int>(), meterSetting), Times.Once);
+    }
+    
+    [Fact]
+    public void Return_DoesNothing_IfBookingIsNotFound()
+    {
+        // Arrange
+        var bookingService = CreateService();
+        _mockBookingDbContext.Setup(x => x.GetBooking(It.IsAny<int>())).ReturnsAsync((Booking?)null);
+        // Act
+        var cost = bookingService.Return(42, 500);
+        // Assert
+        _mockBookingDbContext.Verify(x => x.GetBooking(It.IsAny<int>()), Times.Once);
+        _mockBookingDbContext.Verify(x => x.Return(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
+        _mockVehicleDbContext.Verify(x => x.Return(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
     }
 }
