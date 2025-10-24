@@ -36,7 +36,7 @@ public class BookingsController(IBookingService bookingService, ILogger<Bookings
     }
     
     [HttpPost("pickup/{bookingId}")]
-    public async Task<IActionResult> GetAllAvailable([FromRoute] int bookingId)
+    public async Task<IActionResult> Pickup([FromRoute] int bookingId)
     {
         await bookingService.Pickup(bookingId);
         return Ok();
