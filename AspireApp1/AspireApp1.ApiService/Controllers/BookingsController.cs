@@ -43,7 +43,7 @@ public class BookingsController(IBookingService bookingService, ILogger<Bookings
     }
     
     [HttpPost("return/{bookingId}/{meterSetting}")]
-    public async Task<IActionResult> GetAllAvailable([FromRoute] int bookingId, [FromRoute] int meterSetting)
+    public async Task<IActionResult> Return([FromRoute] int bookingId, [FromRoute] int meterSetting)
     {
         await bookingService.Return(bookingId, meterSetting);
         return Ok();
